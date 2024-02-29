@@ -10,33 +10,53 @@ function Navbar() {
         <li className="flex gap-10 ml-10 text-2xl text-white text-center font-semibold">
           <img src="sakshyam.png" className="h-16" />
           <NavLink
-            className="border- text-black hover:bg-white hover:text-black rounded-md p-1 mt-1 mb-1"
+            className={({ isActive }) => `border-
+            ${isActive ? "text-orange-700" : "text-black"}
+               text-black hover:bg-white hover:text-black rounded-md p-1 mt-1 mb-1`}
             to="/home"
           >
             Home
           </NavLink>
 
           <NavLink
-            className="border-
+            className={({ isActive }) => `border-
+            ${isActive ? "text-orange-700" : "text-black"}
             text-black
+                 
             hover:bg-white
             hover:text-black
             rounded-md
             p-1
-            mt-1"
+            mt-1`}
             to="/about"
           >
             About
           </NavLink>
 
           <NavLink
-            className="border- bg-darkgrey text-black hover:bg-white hover:text-black rounded-md p-1 mt-1"
+            className={({ isActive }) => `border-
+   ${isActive ? "text-orange-700" : "text-black"}
+   text-black
+        
+   hover:bg-white
+   hover:text-black
+   rounded-md
+   p-1
+   mt-1`}
             to="/blog"
           >
             Blog
           </NavLink>
           <NavLink
-            className="border- text-black hover:bg-white hover:text-black rounded-md p-1 mt-1 mb-1"
+            className={({ isActive }) => `border-
+              ${isActive ? "text-orange-700" : "text-black"}
+              text-black
+                   
+              hover:bg-white
+              hover:text-black
+              rounded-md
+              p-1
+              mt-1`}
             to="/contact"
           >
             Contact

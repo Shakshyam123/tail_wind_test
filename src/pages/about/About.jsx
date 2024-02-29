@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-
+import { NavLink } from "react-router-dom";
 function About() {
   const [hello, setHello] = useState("");
   async function face() {
@@ -28,12 +28,16 @@ function About() {
             <br /> printing and typesetting industry. Lorem Ipsum has
             <br /> been the industry standard dummy text ever since the 1500s,
           </p>
-          <button className="font-thin text-lg border-e-black bg-orange-400 p-2 text-center rounded-md hover:bg-orange-800 ml-9">
-            Learn more
-          </button>
-          <button className="font-thin text-lg border-e-black bg-orange-400 p-2 text-center rounded-md hover:bg-orange-800 ml-3">
-            SingIn
-          </button>
+          <NavLink to="/login">
+            <button className="font-thin text-lg border-e-black bg-orange-400 p-2 text-center rounded-md hover:bg-orange-800 ml-9">
+              Learn more
+            </button>
+          </NavLink>
+          <NavLink to="/newlogin">
+            <button className="font-thin text-lg border-e-black bg-orange-400 p-2 text-center rounded-md hover:bg-orange-800 ml-3">
+              SingIn
+            </button>
+          </NavLink>
         </div>
       </div>
       <section className="text-gray-400 bg-gray-300 body-font mt-5">

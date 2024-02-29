@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../../config/encironment-variables";
 
 function Error() {
   // const [data, setData] = useState("");
   // async function test() {
   //   let a = await axios.get("http://localhost:5005/hello2");
-  //   console.log(a.data);
+  //   console.log(a.data);x
   //   setData(a.data);
   // }
   const [dataName, setDataName] = useState("");
   async function like() {
     try {
-      let cat = await axios.get("https://catfact.ninja/fact");
+      let cat = await axios.get(`${API_URL}/fact`);
       console.log(cat.data);
       setDataName(cat.data);
     } catch (err) {
