@@ -1,110 +1,138 @@
 import axios from "axios";
 import { useState } from "react";
 
+import { useForm } from "react-hook-form";
 function Contactus() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  async function hello(e) {
-    e.preventDefault();
+  const [formData, setFormData] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  async function onsubmit(data) {
+    console.log(data);
     try {
-      const jack = await axios({
+      const response = await axios({
         method: "post",
-        url: "http://localhost:5005/van",
-        data: { name, email },
+        url: "http://localhost:5005/world",
+        data: data,
       });
-      console.log(jack);
+
+      console.log(response.data);
+      setFormData(response.data);
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   }
   return (
     <div>
-      <form onSubmit={hello}>
-        <section className="text-gray-600 body-font relative">
-          <div className="container px-5 py-24 mx-auto">
-            <div className="flex flex-col text-center w-full mb-12">
-              <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
-                Contact Us
-              </h1>
-              <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-                fill this sign up page
-              </p>
-            </div>
-            <div className="lg:w-1/2 md:w-2/3 mx-auto">
-              <div className="flex flex-wrap -m-2">
-                <div className="p-2 w-1/2">
-                  <div className="relative">
-                    <label
-                      htmlFor="name"
-                      className="leading-7 text-sm text-gray-600"
-                    >
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                      value={name}
-                      onChange={(e) => {
-                        setName(e.target.value);
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="p-2 w-1/2">
-                  <div className="relative">
-                    <label
-                      htmlFor="email"
-                      className="leading-7 text-sm text-gray-600"
-                    >
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                      value={email}
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="p-2 w-full">
-                  <div className="relative">
-                    <label
-                      htmlFor="message"
-                      className="leading-7 text-sm text-gray-600"
-                    >
-                      Message
-                    </label>
-                    <br />
-                    <textarea
-                      rows="4"
-                      cols="50"
-                      name="comment"
-                      form="usrform"
-                      className="h-12px border-2"
-                    >
-                      .
-                    </textarea>
-                  </div>
-                </div>
-                <div className="p-2 w-full">
-                  <button
-                    className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-                    onClick={Contactus}
-                  >
-                    Submit
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+      <h1 className="text-center text-7xl border-">Fill this form</h1>
+      <form
+        onSubmit={handleSubmit(onsubmit)}
+        className="flex flex-col text-center ml-96 mr-96 mt-10"
+      >
+        <label>Firstname:</label>
+        <input
+          type="text"
+          placeholder="firstname"
+          {...register("firstname", {
+            required: "fill your first name",
+            max: 40,
+            min: 3,
+            maxLength: 20,
+          })}
+        />
+
+        <div className="text-red-700">{errors?.firstname?.message}</div>
+        <label>Lastname:</label>
+        <input
+          type="text"
+          placeholder="lastname"
+          {...register("lastname", {
+            required: "fill your last name",
+            max: 40,
+            min: 3,
+            maxLength: 20,
+          })}
+        />
+        <div className="text-red-700">{errors?.lastname?.message}</div>
+        <div className="flex gap-2">
+          <label>Gender:</label>
+          <label>
+            <input {...register("gender")} type="radio" value="Male" />
+            Male
+          </label>
+          <label>
+            <input {...register("gender")} type="radio" value=" Female " />
+            Female
+          </label>
+          <label>
+            <input {...register("gender")} type="radio" value=" others" />
+            Others
+          </label>
+          {/* <div>{errors?.gender.message}</div> */}
+        </div>
+        <select
+          {...register("Select", { required: "select a country" })}
+          className="ml-20 mr-20"
+        >
+          <option value=""></option>
+          <option value="Nepal ">Nepal </option>
+          <option value=" China "> China </option>
+          <option value=" India"> India</option>
+        </select>
+        {errors?.select?.message}
+        <label>Email</label>
+        <input
+          type="email"
+          placeholder="email"
+          {...register("email", {
+            required: "please enter your email",
+            max: 30,
+            min: 5,
+            maxLength: 30,
+            pattern: /@./i,
+          })}
+        />
+        <div className="text-red-700">{errors?.email?.message}</div>
+        <label>Password</label>
+        <input
+          type="password"
+          placeholder="password"
+          {...register("password", {
+            required: "enter the password",
+            max: 20,
+            min: 5,
+            maxLength: 20,
+            // pattern: /@Ab/i,
+          })}
+        />
+        <div className="text-red-700">{errors?.password?.message}</div>
+        <input
+          type="date"
+          placeholder="birth date"
+          {...register("birth date", { required: true })}
+        />
+
+        <button
+          className="bg-blue-700 p-2 text-white mt-10 rounded-sm "
+          type="submit"
+        >
+          Submit
+        </button>
       </form>
+      <div className=" flex flex-col w-[30%] items-center bg-slate-200 ml-96 mt-4">
+        <h1 className="font-bold text-xl">Data from Backend:</h1>
+
+        {Object.entries(formData).map(([key, value]) => (
+          <p className=" flex p-2  justify-left " key={key}>
+            <div>
+              {key}:{value}
+            </div>
+          </p>
+        ))}
+      </div>
     </div>
   );
 }

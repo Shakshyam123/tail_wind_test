@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
+// import Dashboard from "../pages/admin/dashboard/Dashboard";
 import AdminFooter from "./AdminFooter";
 import AndminNavbar from "./AndminNavbar";
-
+import Sidenav from "./Sidenav";
 function Adminlayout({ children }) {
   return (
     <div>
@@ -12,14 +13,17 @@ function Adminlayout({ children }) {
           flexDirection: "column",
         }}
       >
-        <div className="flex h-full">
-          <div className=" w-96 ">
+        <div className="flex-col ">
+          <div className="">
             <AndminNavbar />
           </div>
-          <div>{children}</div>
-        </div>
-        <div className="bg-gray-800 h-28 ">
-          <AdminFooter />
+          <div className="flex">
+            <Sidenav />
+            <div>{children}</div>
+          </div>
+          <div className="bg-gray-800 h-28 ">
+            <AdminFooter />
+          </div>
         </div>
       </div>
     </div>

@@ -124,7 +124,7 @@ function Contact() {
           }}
           value={formData.name}
         />
-        <span className="mistake">{formDataError.nameError}</span>
+        <span className="text-red-500">{formDataError.nameError}</span>
         <br />
         <label>Email:</label>
         <input
@@ -136,7 +136,7 @@ function Contact() {
           }}
           value={formData.email}
         />
-        <span className="mistake">{formDataError.emailError}</span>
+        <span className="text-red-500">{formDataError.emailError}</span>
         <br />
         <label>Gender:</label>
         <input
@@ -170,7 +170,7 @@ function Contact() {
           <option value="ind">india</option>
           <option value="chin">China</option>
         </select>
-        <span className="text-red-900">{formDataError.countryError}</span>
+        <span className="text-red-500">{formDataError.countryError}</span>
         <br />
         <label>Password:</label>
         <input
@@ -182,7 +182,7 @@ function Contact() {
           }}
           value={formData.password}
         />
-        <span className="mistake">{formDataError.passError}</span>
+        <span className="text-red-500">{formDataError.passError}</span>
         <br />
         <label>Confirm Password:</label>
         <input
@@ -194,7 +194,7 @@ function Contact() {
           }}
           value={formData.confirm}
         />
-        <span className="mistake">{formDataError.confError}</span>
+        <span className="text-red-500">{formDataError.confError}</span>
         <br />
         <button
           className="p-4 bg-neutral-600 w-36 text-gray-200 rounded-full hover:bg-slate-950 hover:text-gray-50"

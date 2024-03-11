@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="bg-[#4C4F4E] mt-auto  text-white text-center p-10 text-3xl text-top ">
+    <footer className="bg-[#4C4F4E]  text-center p-10 text-3xl text-top">
       ###@footer@###
     </footer>
   );
