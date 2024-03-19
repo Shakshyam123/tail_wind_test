@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 
 import { useForm } from "react-hook-form";
+
 function Contactus() {
   const [formData, setFormData] = useState("");
   const {
@@ -18,7 +19,6 @@ function Contactus() {
         url: "http://localhost:5005/world",
         data: data,
       });
-
       console.log(response.data);
       setFormData(response.data);
     } catch (error) {
@@ -43,7 +43,6 @@ function Contactus() {
             maxLength: 20,
           })}
         />
-
         <div className="text-red-700">{errors?.firstname?.message}</div>
         <label>Lastname:</label>
         <input
@@ -73,15 +72,18 @@ function Contactus() {
           </label>
           {/* <div>{errors?.gender.message}</div> */}
         </div>
-        <select
-          {...register("Select", { required: "select a country" })}
-          className="ml-20 mr-20"
-        >
-          <option value=""></option>
-          <option value="Nepal ">Nepal </option>
-          <option value=" China "> China </option>
-          <option value=" India"> India</option>
-        </select>
+        <label>
+          Select
+          <select
+            {...register("Select", { required: "select a country" })}
+            className="ml-20 mr-20"
+          >
+            <option value=""></option>
+            <option value="Nepal ">Nepal </option>
+            <option value=" China "> China </option>
+            <option value=" India"> India</option>
+          </select>
+        </label>
         {errors?.select?.message}
         <label>Email</label>
         <input
@@ -124,7 +126,6 @@ function Contactus() {
       </form>
       <div className=" flex flex-col w-[30%] items-center bg-slate-200 ml-96 mt-4">
         <h1 className="font-bold text-xl">Data from Backend:</h1>
-
         {Object.entries(formData).map(([key, value]) => (
           <p className=" flex p-2  justify-left " key={key}>
             <div>

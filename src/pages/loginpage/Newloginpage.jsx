@@ -1,8 +1,10 @@
 import axios from "axios";
+import Spinner from "../Spinner";
 
 import { useState } from "react";
 
 function Loginpage() {
+  const [loading, setLoading] = useState("");
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -11,6 +13,7 @@ function Loginpage() {
   async function onSubmit(e) {
     e.preventDefault();
     try {
+      setLoading(true);
       const post = await axios({
         method: "post",
         url: "http://localhost:5005/nav",
@@ -20,8 +23,10 @@ function Loginpage() {
       setError();
       setSucessMessage(post.data);
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error);
       setError(error.response.data);
+    } finally {
+      setLoading(false);
     }
   }
   return (
@@ -68,8 +73,9 @@ function Loginpage() {
             <button
               className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
               type="submit"
+              disabled={loading}
             >
-              login
+              login {loading && <Spinner />}
             </button>
             <p className="text-xs text-gray-500 mt-3">Fill this form</p>
           </div>

@@ -21,6 +21,11 @@ import AndminNavbar from "./component/AndminNavbar";
 import Adminhome from "./pages/admin/Adminhome";
 import GlobleContext from "./Globalcontext";
 import { useState } from "react";
+import Table from "./component/Table";
+import Example from "./component/Materialtable";
+import Validate from "./pages/contact/Validate";
+import LoginPageNew from "./pages/contact/LoginPageNew";
+import Register from "./pages/contact/Register";
 
 function App() {
   const [theme, setTheme] = useState({
@@ -48,6 +53,7 @@ function App() {
             <Route path="/adminabout" element={<Adminservice />} />
             <Route path="/admincontact" element={<Admincontact />} />
           </Route>
+
           <Route
             path="/admin/:num"
             element={
@@ -56,8 +62,13 @@ function App() {
               </AndminNavbar>
             }
           />
+          <Route path="/table" element={<Table />} />
+          <Route path="/material" element={<Example />} />
+          <Route path="/loginpage" element={<LoginPageNew />} />
+          <Route path="/register" element={<Register />} />
           <Route path="*" element={<Error />} />
           <Route path="/contactus" element={<Contactus />} />
+          <Route path="/validate" element={<Validate />} />
         </Routes>
       </GlobleContext.Provider>
     </>

@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-
+import Spinner from "../Spinner";
 function Loginpage() {
   const cookie = Cookies.get("token");
   const navigate = useNavigate("");
@@ -34,6 +34,7 @@ function Loginpage() {
       {!cookie ? <div></div> : <Navigate to={"/admin"} />}
       <div>
         <div>
+          z
           <form onSubmit={onSubmit}>
             <div className="lg:w-2/6  bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full text-center mr-96 mt-4">
               <h2 className="text-gray-900 text-lg font-medium title-font mb-5">
@@ -76,7 +77,7 @@ function Loginpage() {
                 className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
                 type="submit"
               >
-                login
+                login <Spinner />
               </button>
               <p className="text-xs text-gray-500 mt-3">Fill this form</p>
             </div>
@@ -84,6 +85,7 @@ function Loginpage() {
         </div>
         hello this is main page
       </div>
+      <div></div>
     </>
   );
 }
