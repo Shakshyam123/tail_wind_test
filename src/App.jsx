@@ -48,7 +48,7 @@ function App() {
           <Route path="/name/:num" element={<Dashboard />} />
           <Route path="/admin" element={<Protected />}>
             <Route path="/adminnav" element={<About />} />
-            <Route path="/admin/home" element={<Adminhome />} />
+            <Route path="/adminhome" element={<Adminhome />} />
             <Route path="/admin/service" element={<Adminabout />} />
             <Route path="/adminabout" element={<Adminservice />} />
             <Route path="/admincontact" element={<Admincontact />} />

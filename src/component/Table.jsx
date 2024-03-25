@@ -1,9 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useTheme } from "../store/useTheme";
 
 function Table() {
+  const { color, bgColor, setColor, setDefault } = useTheme();
+
   const [moreTable, setMoreTable] = useState([]);
   const [tableData, setTableData] = useState([]);
+
   async function table() {
     try {
       const response = await axios({
@@ -11,11 +15,11 @@ function Table() {
         url: "http://localhost:5005/table",
       });
       setTableData(response.data);
-      console.log(response.data);
     } catch (err) {
       console.log(err);
     }
   }
+
   useEffect(() => {
     table();
     moredata();
@@ -27,19 +31,37 @@ function Table() {
         method: "get",
         url: "http://localhost:5005/tabledata",
       });
-      console.log(hello.data);
       setMoreTable(hello.data);
     } catch (error) {
       console.log(error);
     }
   }
-  console.log(moreTable);
+
   return (
     <div>
-      <h1>Table data pulled from backend using map method</h1>
+      <button
+        onClick={() => {
+          setColor("yellow", "red ");
+        }}
+      >
+        Change color
+      </button>
+      <br />
+      <button
+        onClick={() => {
+          setDefault();
+        }}
+      >
+        default me
+      </button>
+      <h1 style={{ color: color, backgroundColor: bgColor }}>
+        Table data pulled from backend using map method
+      </h1>
       <table>
         <thead>
-          <tr>
+          <tr
+            style={{ backgroundColor: bgColor, color: color, height: "25px" }}
+          >
             <td>sn</td>
             <td>Name</td>
             <td>class</td>

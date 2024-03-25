@@ -1,8 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useTheme } from "../../store/useTheme";
 function About() {
   const [hello, setHello] = useState("");
+  const { color, bgColor, setColor, setDefault } = useTheme();
+  console.log(color);
+  console.log(bgColor);
+
   async function face() {
     try {
       const king = await axios.get("https://api.nationalize.io?name=nathaniel");
@@ -14,6 +19,21 @@ function About() {
   }
   return (
     <div>
+      <button
+        onClick={() => {
+          setColor("blue", "green");
+        }}
+      >
+        change me
+      </button>
+      <br />
+      <button
+        onClick={() => {
+          setDefault();
+        }}
+      >
+        default me
+      </button>
       <div>
         <img
           src="image5.jpg"

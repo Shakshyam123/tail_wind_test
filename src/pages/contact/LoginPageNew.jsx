@@ -1,12 +1,14 @@
 import axios from "axios";
-
 import Cookies from "js-cookie";
+import { useState } from "react";
+
 import { useForm } from "react-hook-form";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 function LoginPageNew() {
+  const [sucessData, setSucessData] = useState("");
   const cookie = Cookies.get("token");
-  const navigate = useNavigate("");
+
   async function onSubmit(data) {
     try {
       const response = await axios({
@@ -15,8 +17,8 @@ function LoginPageNew() {
         data: { email: data.email, password: data.password },
       });
       Cookies.set("token", response.data.token, { path: "/" });
-      console.log(response);
-      navigate("/admin");
+      console.log(response.data);
+      setSucessData(response.data);
       console.log(response.data);
     } catch (error) {
       console.log(error);
@@ -72,7 +74,7 @@ function LoginPageNew() {
                   })}
                 />
                 <div className="text-red-700">{errors?.password?.message}</div>
-
+                {sucessData}
                 <button
                   className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-3"
                   type="submit"

@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [datas, setDatas] = useState([]);
-
+  const navigate = useNavigate();
   async function onSubmit(data) {
     try {
       const response = await axios.post("http://localhost:5005/prisma", {
@@ -13,7 +14,9 @@ function Register() {
         password: data.password,
       });
       console.log(response.data);
+
       getData();
+      navigate("/loginpage");
     } catch (error) {
       console.log(error);
     }

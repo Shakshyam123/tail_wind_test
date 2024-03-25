@@ -1,9 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useTheme } from "../../store/useTheme";
 
 function Contact() {
   const [axix, setAxix] = useState("");
+  const { color, bgColor, setColor, setDefault } = useTheme();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -111,120 +114,139 @@ function Contact() {
   }
 
   return (
-    <div className="mt-12 ml-52">
-      <div className=" ml-50">
-        <h1 className="text-center text-2xl">Fill this form</h1>
-        <label>Name:</label>
-        <input
-          type="text"
-          placeholder="Name"
-          className="bg-gray-50 border border-gray-300 text-gray-900  rounded-lg w-full b-2 h-12 text-xl hover:border-blue-400"
-          onChange={(e) => {
-            setFormData({ ...formData, name: e.target.value });
-          }}
-          value={formData.name}
-        />
-        <span className="text-red-500">{formDataError.nameError}</span>
-        <br />
-        <label>Email:</label>
-        <input
-          type="text"
-          placeholder="Email"
-          className="bg-gray-50 border border-gray-300 text-gray-900  rounded-lg w-full b-2 h-12 text-xl hover:border-blue-800"
-          onChange={(e) => {
-            setFormData({ ...formData, email: e.target.value });
-          }}
-          value={formData.email}
-        />
-        <span className="text-red-500">{formDataError.emailError}</span>
-        <br />
-        <label>Gender:</label>
-        <input
-          type="radio"
-          name="gender"
-          value="Male"
-          onChange={(e) => {
-            setFormData({ ...formData, gender: e.target.value });
-          }}
-        />
-        <label>Male</label>
-        <input
-          type="radio"
-          value="Female"
-          name="gender"
-          onChange={(e) => {
-            setFormData({ ...formData, gender: e.target.value });
-          }}
-        />
-        <label>Female</label>
-        <br />
-        <select
-          onChange={(e) => {
-            setFormData({ ...formData, country: e.target.value });
-          }}
-        >
-          <option value="select.." className="text-gray-700 ">
-            select
-          </option>
-          <option value="nep">nepal</option>
-          <option value="ind">india</option>
-          <option value="chin">China</option>
-        </select>
-        <span className="text-red-500">{formDataError.countryError}</span>
-        <br />
-        <label>Password:</label>
-        <input
-          type="password"
-          placeholder="Password"
-          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full b-2 h-12 text-xl hover:border-blue-400"
-          onChange={(e) => {
-            setFormData({ ...formData, password: e.target.value });
-          }}
-          value={formData.password}
-        />
-        <span className="text-red-500">{formDataError.passError}</span>
-        <br />
-        <label>Confirm Password:</label>
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          className="bg-gray-50 border border-gray-300 text-gray-900  rounded-lg w-full b-6 h-12 text-xl hover:border-blue-400"
-          onChange={(e) => {
-            setFormData({ ...formData, confirm: e.target.value });
-          }}
-          value={formData.confirm}
-        />
-        <span className="text-red-500">{formDataError.confError}</span>
-        <br />
-        <button
-          className="p-4 bg-neutral-600 w-36 text-gray-200 rounded-full hover:bg-slate-950 hover:text-gray-50"
-          onClick={dataValid}
-        >
-          Submit
-        </button>
-        <div>
-          <button
-            onClick={hover}
-            className="text-white bg-black p-2 rounded-lg"
+    <>
+      <button
+        onClick={() => {
+          setColor("red   ", "yellow");
+        }}
+      >
+        Change me
+      </button>
+      <button
+        onClick={() => {
+          setDefault();
+        }}
+      >
+        Default
+      </button>
+      <div
+        className="mt-2 ml-6 p-12 rounded-full"
+        style={{ backgroundColor: bgColor, color: color }}
+      >
+        <div className=" ml-50">
+          <h1 className="text-center text-2xl">Fill this form</h1>
+          <label>Name:</label>
+          <input
+            type="text"
+            placeholder="Name"
+            className="bg-gray-50 border border-gray-300 text-gray-900  rounded-lg w-full b-2 h-12 text-xl hover:border-blue-400"
+            onChange={(e) => {
+              setFormData({ ...formData, name: e.target.value });
+            }}
+            value={formData.name}
+          />
+          <span className="text-red-500">{formDataError.nameError}</span>
+          <br />
+          <label>Email:</label>
+          <input
+            type="text"
+            placeholder="Email"
+            className="bg-gray-50 border border-gray-300 text-gray-900  rounded-lg w-full b-2 h-12 text-xl hover:border-blue-800"
+            onChange={(e) => {
+              setFormData({ ...formData, email: e.target.value });
+            }}
+            value={formData.email}
+          />
+          <span className="text-red-500">{formDataError.emailError}</span>
+          <br />
+          <label>Gender:</label>
+          <input
+            type="radio"
+            name="gender"
+            value="Male"
+            onChange={(e) => {
+              setFormData({ ...formData, gender: e.target.value });
+            }}
+          />
+          <label>Male</label>
+          <input
+            type="radio"
+            value="Female"
+            name="gender"
+            onChange={(e) => {
+              setFormData({ ...formData, gender: e.target.value });
+            }}
+          />
+          <label>Female</label>
+          <br />
+          <select
+            onChange={(e) => {
+              setFormData({ ...formData, country: e.target.value });
+            }}
           >
-            click me
+            <option value="select.." className="text-gray-700 ">
+              select
+            </option>
+            <option value="nep">nepal</option>
+            <option value="ind">india</option>
+            <option value="chin">China</option>
+          </select>
+          <span className="text-red-500">{formDataError.countryError}</span>
+          <br />
+          <label>Password:</label>
+          <input
+            type="password"
+            placeholder="Password"
+            className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full b-2 h-12 text-xl hover:border-blue-400"
+            onChange={(e) => {
+              setFormData({ ...formData, password: e.target.value });
+            }}
+            value={formData.password}
+          />
+          <span className="text-red-500">{formDataError.passError}</span>
+          <br />
+          <label>Confirm Password:</label>
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            className="bg-gray-50 border border-gray-300 text-gray-900  rounded-lg w-full b-6 h-12 text-xl hover:border-blue-400"
+            onChange={(e) => {
+              setFormData({ ...formData, confirm: e.target.value });
+            }}
+            value={formData.confirm}
+          />
+          <span className="text-red-500">{formDataError.confError}</span>
+          <br />
+          <button
+            className="p-4 bg-neutral-600 w-36 text-gray-200 rounded-full hover:bg-slate-950 hover:text-gray-50"
+            onClick={dataValid}
+          >
+            Submit
           </button>
           <div>
-            {axix && (
-              <>
-                <div>{axix.count}</div>
-                <div>{axix.name}</div>
-              </>
-            )}
+            <button
+              onClick={hover}
+              className="text-white bg-black p-2 rounded-lg"
+            >
+              click me
+            </button>
+            <div>
+              {axix && (
+                <>
+                  <div>{axix.count}</div>
+                  <div>{axix.name}</div>
+                </>
+              )}
+            </div>
           </div>
         </div>
+        <Link to="/contactus">
+          <button className="border bg-black text-white p-2">
+            click me to go to contact us page
+          </button>
+        </Link>
       </div>
-      <Link to="/contactus">
-        <button className="border bg-black text-white p-2">
-          click me to go to contact us page
-        </button>
-      </Link>
-    </div>
+    </>
   );
 }
 export default Contact;

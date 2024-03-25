@@ -5,6 +5,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import Spinner from "../Spinner";
 function Loginpage() {
   const cookie = Cookies.get("token");
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate("");
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -27,11 +28,14 @@ function Loginpage() {
     } catch (error) {
       console.log(error.response.data);
       setError(error.response.data);
+    } finally {
+      setLoading(false);
     }
   }
   return (
     <>
       {!cookie ? <div></div> : <Navigate to={"/admin"} />}
+
       <div>
         <div>
           z
@@ -77,7 +81,7 @@ function Loginpage() {
                 className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
                 type="submit"
               >
-                login <Spinner />
+                login {loading && <Spinner />}
               </button>
               <p className="text-xs text-gray-500 mt-3">Fill this form</p>
             </div>
